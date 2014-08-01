@@ -31,7 +31,7 @@ module LogStashLogger
 
       def with_connection
         connect unless @io
-        reconnect
+        reconnect unless @io.client.connected?
         yield
       rescue ::Redis::InheritedError
         reconnect
